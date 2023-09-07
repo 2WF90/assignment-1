@@ -18,7 +18,6 @@
 import json
 
 
-
 def solve(exercise: object):
     """
     solves an exercise specified in the file located at exercise_location and
@@ -28,14 +27,6 @@ def solve(exercise: object):
     x = exercise["x"]
     radix = exercise["radix"]
     operation = exercise["operation"]
-
-    # Open file at exercise_location for reading.
-    with open(exercise_location, "r") as exercise_file:
-        # Deserialize JSON exercise data present in exercise_file to corresponding Python exercise data
-        exercise = json.load(exercise_file)
-
-
-    ### Parse and solve ###
 
     # Check type of exercise
     if exercise["type"] == "integer_arithmetic":
@@ -47,7 +38,7 @@ def solve(exercise: object):
             # Solve integer arithmetic subtraction exercise
             pass
         # et cetera
-    else: # exercise["type"] == "modular_arithmetic"
+    elif exercise["type"] == "modular_arithmetic":
         # Check what operation within the modular arithmetic operations we need to solve
         if operation == "reduction":
             # Solve modular arithmetic reduction exercise
