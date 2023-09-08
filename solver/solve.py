@@ -46,13 +46,6 @@ def solve(exercise: object):
         # et cetera
 
 
-    # Open file at answer_location for writing, creating the file if it does not exist yet
-    # (and overwriting it if it does already exist).
-    with open(answer_location, "w") as answer_file:
-        # Serialize Python answer data (stored in answer) to JSON answer data and write it to answer_file
-        json.dump(answer, answer_file, indent=4)
-
-
 def solve_from_file(exercise_location: str) -> object:
     with open(exercise_location, "r") as exercise_file:
         exercise = json.load(exercise_file)
