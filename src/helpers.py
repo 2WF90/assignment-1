@@ -4,6 +4,7 @@ KEYS = {v: k for k, v in REPRESENTATIONS.items()}
 
 
 def get_representation(x: int) -> str:
+    int()
     return REPRESENTATIONS[x].upper()
 
 
