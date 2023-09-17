@@ -8,11 +8,16 @@ from decorators import callonce
 # Modified version of: https://stackoverflow.com/questions/23709429/how-to-emulate-4-bit-integer-in-python-3
 # IntR represents a single digit of radix t
 # IntR is a subclass of int, therefore all standard operations that apply to int also apply to IntR
+# IntR ONLY WORKS FOR BASES THAT ARE A POWER OF 2 - 1 (think of binary -> 0x1, oct -> 0x7 and hex -> 0xf)
 # param t: the radix of IntR (functions as the type of the object)
 # param val: the value of the number 
 class IntR(int):
     def __new__(self, r, val):
         initIntR()
+
+        if r != (r | (r >> 1)):
+            raise ValueError('Radix incorrectly formatted, make sure all bits upto the most significant bit are set to 1')
+
         self.r = r
         return super(IntR, self).__new__(self, val & r)
     
@@ -43,15 +48,18 @@ def initIntR():
 
 # testing
 if __name__ == "__main__":
+    i = IntR(0xff, 5)
     x = 4
     y = 15
     u = IntR(0xf, x)
     v = IntR(0xf, y)
+    m = IntR(0x1f, u)
+    print(m.radix())
 
     print(bin(x * y))
-    print((x * y) & 0xf)
-    print( v % u)
-    print(u*v)
+    print(bin((x * y) & 0xf))
+    print((v * u)& 9)
+    print(u+v)
     from operator import * 
     print(mul(u, v))
     print(type(u + y))
