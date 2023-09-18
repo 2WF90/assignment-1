@@ -48,6 +48,13 @@ def initIntR():
 
 # testing
 if __name__ == "__main__":
+    l = IntR(0xff, -5)
+    q = IntR(0xff, 3)
+    print(l)
+    print(l + q)
+    print(bin(l+q))
+    print((l + q) >> 4)
+    print("lmao", IntR(0xf, 5) + IntR(0xf, 15))
     i = IntR(0xff, 5)
     x = 4
     y = 15
