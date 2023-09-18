@@ -24,3 +24,9 @@ def test_negative_to_string():
     x = Integer.from_string("-AB894F")
 
     assert "-AB894F" == x.to_string()
+
+
+def test_with_padding():
+    x = Integer.from_string("-AB894F")
+
+    assert "-0000AB894F" == x.with_padding(10).to_string()

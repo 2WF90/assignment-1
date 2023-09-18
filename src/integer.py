@@ -1,5 +1,5 @@
 from src.helpers import *
-
+from typing import Self
 
 class Integer:
     def __init__(self, exponents: list[int], is_negative: bool = False):
@@ -20,5 +20,5 @@ class Integer:
             [get_representation(exponent) for exponent in self.exponents[::-1]]
         )
 
-    def get_with_padding(self, padding: int) -> int:
-        return self.exponents[padding] if padding < len(self.exponents) else 0
+    def with_padding(self, length: int) -> Self:
+        return Integer(self.exponents + [0] * (length - len(self.exponents)), self.is_negative)
