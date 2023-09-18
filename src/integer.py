@@ -9,7 +9,7 @@ class Integer:
     def __len__(self):
         return len(self.exponents)
 
-    def from_string(value: str):
+    def from_string(value: str) -> Self:
         return Integer(
             [get_key(digit) for digit in absolute(value)][::-1],
             not is_at_least_zero(value),
