@@ -26,7 +26,8 @@ class Data():
 
     # Not sure if your allowed to convert bases like this in the assingment
     # Note: first element in returned list is least significant digit
-    def strToIntR(self, radix: int, IntRBase: int, strNum: str) -> list:
+
+    def strToIntR(self, radix: int, IntRBase: int, strNum: str) -> list[IntR]:
         IntList = list()
         num = 0
 
@@ -34,7 +35,7 @@ class Data():
         for i, c in enumerate(reversed(strNum)):
             num = num + KEYS[c] * (radix**i)
 
-        #Convert integer to list of IntR 
+        #Convert integer to list of IntR
         msbIndex = self.getIndexMSB(IntRBase)
         while num > 0:
             IntList.append(IntR(IntRBase, num))
@@ -62,17 +63,19 @@ class Data():
 
     def getRadix(self) -> int:
         return self.radix
-    
-    def getX(self) -> list:
+
+    def getX(self) -> list[IntR]:
         return self.x
-    
-    def getY(self) -> list:
+
+    def getY(self) -> list[IntR]:
         return self.y
-    
+
     def getIntRBase(self) -> int:
         return self.IntRBase
-    
+
+
 if __name__ == "__main__":
     d = Data(10, "1234", "583")
     print("x", d.x, "y", d.y)
-    print("x", d.IntRtoStr(d.getRadix(), d.x), "y", d.IntRtoStr(d.getRadix(), d.y))
+    print("x", d.IntRtoStr(d.getRadix(), d.x),
+          "y", d.IntRtoStr(d.getRadix(), d.y))
