@@ -16,6 +16,17 @@
 
 # Import built-in json library for handling input/output
 import json
+from src.basic_arithmetic import add, subtract
+
+from src.integer import Integer
+
+
+"""
+1. addition/subtraction
+2. multiplication
+3. division
+4. modular reduction
+5. modular exponentiation"""
 
 
 def solve(exercise: object):
@@ -24,19 +35,24 @@ def solve(exercise: object):
     writes the answer to a file at answer_location. Note: the file at
     answer_location might not exist yet and, hence, might still need to be created.
     """
-    x = exercise["x"]
     radix = exercise["radix"]
     operation = exercise["operation"]
+    x = Integer.from_string(exercise["x"], radix)
 
     # Check type of exercise
     if exercise["type"] == "integer_arithmetic":
         # Check what operation within the integer arithmetic operations we need to solve
         if operation == "addition":
-            # Solve integer arithmetic addition exercise
-            pass
+            result = add(x, Integer.from_string(
+                exercise["y"], radix)).to_string()
+
+            return {"answer": result}
+
         elif operation == "subtraction":
-            # Solve integer arithmetic subtraction exercise
-            pass
+            result = subtract(x, Integer.from_string(
+                exercise["y"], radix)).to_string()
+
+            return {"answer": result}
         # et cetera
     elif exercise["type"] == "modular_arithmetic":
         # Check what operation within the modular arithmetic operations we need to solve

@@ -2,7 +2,7 @@ from .assert_answer import assert_exercise
 
 
 def test_realistic_exercise_1():
-    assert_exercise("realistic", 3)
+    assert_exercise("realistic", 6)
 
 
 def test_realistic_exercise_2():

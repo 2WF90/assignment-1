@@ -1,4 +1,4 @@
-from solver.solve import solve_from_file
+from src.solve import solve_from_file
 import json
 
 
