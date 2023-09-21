@@ -29,7 +29,7 @@ def add(x: Integer, y: Integer) -> Integer:
     if carry == 1:
         result.append(carry)
 
-    return Integer(result, x.is_negative)
+    return Integer(result, x.is_negative, x.radix)
 
 
 def subtract(x: Integer, y: Integer) -> Integer:
