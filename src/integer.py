@@ -11,6 +11,9 @@ class Integer:
     def __len__(self):
         return len(self.exponents)
 
+    def __getitem__(self, key):
+        return self.exponents[key]
+
     def from_string(value: str, radix: int) -> Self:
         return Integer(
             [get_key(digit) for digit in absolute(value)][::-1],
