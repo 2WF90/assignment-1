@@ -19,6 +19,8 @@ import json
 from src.basic_arithmetic import add, subtract
 
 from src.integer import Integer
+from src.modular_arithmetic import mod_add, mod_subtract
+from src.reduction import reduce
 
 
 """
@@ -43,22 +45,36 @@ def solve(exercise: object):
     if exercise["type"] == "integer_arithmetic":
         # Check what operation within the integer arithmetic operations we need to solve
         if operation == "addition":
-            result = add(x, Integer.from_string(
-                exercise["y"], radix)).to_string()
+            result = add(x, Integer.from_string(exercise["y"], radix)).to_string()
 
             return {"answer": result}
 
         elif operation == "subtraction":
-            result = subtract(x, Integer.from_string(
-                exercise["y"], radix)).to_string()
+            result = subtract(x, Integer.from_string(exercise["y"], radix)).to_string()
 
             return {"answer": result}
         # et cetera
     elif exercise["type"] == "modular_arithmetic":
+        modulus = Integer.from_string(exercise["modulus"], radix)
+
         # Check what operation within the modular arithmetic operations we need to solve
         if operation == "reduction":
-            # Solve modular arithmetic reduction exercise
-            pass
+            result = reduce(x, modulus).to_string()
+
+            return {"answer": result}
+        if operation == "addition":
+            result = mod_add(
+                x, Integer.from_string(exercise["y"], radix), modulus
+            ).to_string()
+
+            return {"answer": result}
+
+        if operation == "subtraction":
+            result = mod_subtract(
+                x, Integer.from_string(exercise["y"], radix), modulus
+            ).to_string()
+
+            return {"answer": result}
         # et cetera
 
 
