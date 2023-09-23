@@ -17,7 +17,7 @@ def add(x: Integer, y: Integer) -> Integer:
     carry = 0
 
     for i in range(max_length):
-        result[i] = padded_x.exponents[i] + padded_y.exponents[i] + carry
+        result[i] = padded_x[i] + padded_y[i] + carry
 
         if result[i] >= x.radix:
             result[i] -= x.radix
@@ -29,12 +29,10 @@ def add(x: Integer, y: Integer) -> Integer:
     if carry == 1:
         result.append(carry)
 
-    return Integer(result, x.is_negative)
+    return Integer(result, x.is_negative, x.radix)
 
 
 def subtract(x: Integer, y: Integer) -> Integer:
-    # TODO ask if we also should account for when x < y
-
     if x.is_negative and y.is_negative:
         return subtract(y.make_absolute(), x.make_absolute())
 
@@ -49,11 +47,18 @@ def subtract(x: Integer, y: Integer) -> Integer:
     padded_x = x.pad(max_length)
     padded_y = y.pad(max_length)
 
+    for i in range(max_length -1, -1, -1):
+        if padded_x[i] > padded_y[i]:
+            break
+
+        if padded_x[i] < padded_y[i]:
+            return subtract(y, x).set_negative()
+
     result = [0] * max_length
     carry = 0
 
     for i in range(max_length):
-        result[i] = padded_x.exponents[i] - padded_y.exponents[i] - carry
+        result[i] = padded_x[i] - padded_y[i] - carry
 
         if result[i] < 0:
             result[i] += x.radix
