@@ -30,9 +30,9 @@ class Integer:
         )
 
     def pad(self, pad_length: int) -> Self:
-        self.exponents += [0] * (pad_length - len(self.exponents))
+        exponents = self.exponents + [0] * (pad_length - len(self.exponents))
 
-        return self
+        return Integer(exponents, self.is_negative, self.radix)
 
     def strip_pad(self) -> Self:
         while len(self.exponents) > 1 and self.exponents[-1] == 0:
@@ -41,11 +41,7 @@ class Integer:
         return Integer(self.exponents, self.is_negative, self.radix)
 
     def make_absolute(self) -> Self:
-        self.is_negative = False
-
-        return self
+        return Integer(self.exponents, False, self.radix)
 
     def set_negative(self) -> Self:
-        self.is_negative = True
-
-        return self
+        return Integer(self.exponents, True, self.radix)
