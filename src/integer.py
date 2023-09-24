@@ -31,8 +31,10 @@ class Integer:
 
         return self
 
-    def pad_back(sefl, n: int) -> Self:
+    def pad_back(self, n: int) -> Self:
         self.exponents = [0] * n + self.exponents
+
+        return self
 
     def pad(self, pad_length: int) -> Self:
         self.exponents += [0] * (pad_length - len(self.exponents))

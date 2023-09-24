@@ -4,9 +4,9 @@ from basic_arithmetic import add, subtract
 # Gateway to karatsuba, does negativity overhead checks
 def multiplication(a: Integer, b: Integer) -> Integer:
 	if a.is_negative ^ b.is_negative:
-		return karastuba(a, b).set_negative()
+		return karatsuba(a, b).set_negative()
 
-	return karastuba(a, b)
+	return karatsuba(a, b)
 
 
 def karatsuba(x: Integer, y: Integer) -> Integer:
@@ -18,6 +18,7 @@ def karatsuba(x: Integer, y: Integer) -> Integer:
 	# Base case:
 	if n == 1:
 		m = x[0] * y[0]
+		print(x[0], y[0], m)
 
 		return Integer([m % x.radix, m // x.radix], False, x.radix)
 
@@ -48,18 +49,20 @@ def karatsuba(x: Integer, y: Integer) -> Integer:
 		Xm.pad_n(1)
 
 	# Recurse on all 3 parts
-	XlYl = karastuba(Xl, Yl)
-	XsYs = karastuba(Xs, Ys)
-	XmYm = karastuba(Xm, Ym)
+	XlYl = karatsuba(Xl, Yl)
+	XsYs = karatsuba(Xs, Ys)
+	XmYm = karatsuba(Xm, Ym)
 
-	XmYm = subtract(subtract(XmYm, XlYl), XsYs).pad_back(halfN)
+	# Compute mid and shift digits
+	XmYm = subtract(subtract(XmYm, XlYl), XsYs)
+	XmYm.pad_back(halfN)
 	XlYl.pad_back(n)
 
 	return add(add(XlYl, XmYm), XsYs)
 
 
 if __name__ == "__main__":
-	a = Integer([1, 2, 3, 4, 5], False, 10)
-	b = Integer([1, 2, 3, 4, 5], False, 10)
+	a = Integer([1, 2, 3, 4, 5, 6], False, 10)
+	b = Integer([1, 2, 3, 4, 5, 6], False, 10)
 
 	print(multiplication(a, b).exponents)
