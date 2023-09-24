@@ -2,7 +2,7 @@ from src.integer import Integer
 from src.basic_arithmetic import add, subtract
 
 
-def divide(x: Integer, y: Integer) -> Integer:
+def divide(x: Integer, y: Integer) -> tuple[Integer, Integer]:
     result_is_negative = x.is_negative ^ y.is_negative
 
     x = x.make_absolute()

@@ -8,10 +8,10 @@ class Integer:
         self.is_negative = is_negative
         self.radix = radix
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.exponents)
 
-    def __getitem__(self, key):
+    def __getitem__(self, key) -> int:
         return self.exponents[key]
 
     def from_string(value: str, radix: int) -> Self:
