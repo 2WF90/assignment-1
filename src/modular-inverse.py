@@ -1,16 +1,19 @@
 #import (subtraction, multiplication, devision)
+from src.basic_arithmetic import add, subtract
 
+# Computes the modular inverse for a mod m. If it exists.
 def ModInverse(a: int, modulus: int):
     xOne = 1
     xTwo = 0
     while modulus > 0:
-        # q = rounddown(a / m) (Use devision)
-        # r = a - q * m (use subtraction and multiplication)
-        # a = m
-        # m = r
-        # xThree = xOne - q * xTwo (use subtraction and multiplication)
-        # xOne = xTwo
-        # xTwo = xThree
+        # q = rounddown(a / m) #(Use devision, discard rest)
+
+        r = subtract(a, q * m) #(use multiplication)
+        a = m
+        m = r
+        xThree = subtract(xOne, q * xTwo) #(use multiplication)
+        xOne = xTwo
+        xTwo = xThree
         pass
     
     if a == 1:
