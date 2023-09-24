@@ -1,18 +1,30 @@
-from integer import Integer
-from basic_arithmetic import add, subtract
+from src.integer import Integer
+from src.basic_arithmetic import add, subtract
 
 # Gateway to karatsuba, does negativity and length overhead checks
+# param: x, any Integer
+# param: y, any Integer
+# return x * y, Integer
 def multiplication(x: Integer, y: Integer) -> Integer:
     max_length = max(len(x), len(y))
     x.pad(max_length)
     y.pad(max_length)
 
     if x.is_negative ^ y.is_negative:
-        return karatsuba(x, y).set_negative().strip_pad()
+        result = karatsuba(x, y).set_negative().strip_pad()
+    else:
+        result = karatsuba(x, y).strip_pad()
 
-    return karatsuba(x, y).strip_pad()
+    if len(result) == 0:
+        result.pad_n(1)
+
+    return result
 
 # Karatsuba algorithm, calculates multiplication of 2 integers
+# param: x, Integer
+# param: y, Integer
+# length of x and y must be the same
+# return x * y, Integer
 def karatsuba(x: Integer, y: Integer) -> Integer:
     n = len(x)
 
@@ -22,7 +34,6 @@ def karatsuba(x: Integer, y: Integer) -> Integer:
     # Base case:
     if n == 1:
         m = x[0] * y[0]
-        print(x[0], y[0], m)
 
         return Integer([m % x.radix, m // x.radix], False, x.radix)
 
@@ -63,13 +74,3 @@ def karatsuba(x: Integer, y: Integer) -> Integer:
     XlYl.pad_back(n)
 
     return add(add(XlYl, XmYm), XsYs)
-
-
-if __name__ == "__main__":
-    #a = Integer([1, 2, 3, 4, 5, 6, 7], False, 10)
-    #b = Integer([1, 2, 3, 4, 5, 6, 7], False, 10)
-
-    a = Integer([2, 3], False, 10)
-    b = Integer([3,4,5,8], False, 10)
-
-    print(multiplication(a, b).exponents)

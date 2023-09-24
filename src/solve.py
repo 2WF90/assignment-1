@@ -16,9 +16,9 @@
 
 # Import built-in json library for handling input/output
 import json
-from basic_arithmetic import add, subtract
+from src.basic_arithmetic import add, subtract
 
-from integer import Integer
+from src.integer import Integer
 
 
 """
