@@ -26,6 +26,14 @@ class Integer:
             [get_representation(exponent) for exponent in self.exponents[::-1]]
         )
 
+    def pad_n(self, n: int) -> Self:
+        self.exponents += [0] * n
+
+        return self
+
+    def pad_back(sefl, n: int) -> Self:
+        self.exponents = [0] * n + self.exponents
+
     def pad(self, pad_length: int) -> Self:
         self.exponents += [0] * (pad_length - len(self.exponents))
 
