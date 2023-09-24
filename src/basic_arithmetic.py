@@ -1,4 +1,4 @@
-from src.integer import Integer
+from integer import Integer
 
 
 def add(x: Integer, y: Integer) -> Integer:

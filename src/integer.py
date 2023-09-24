@@ -1,5 +1,5 @@
 from typing import Self
-from src.helpers import *
+from helpers import *
 
 
 class Integer:
