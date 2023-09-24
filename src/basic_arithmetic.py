@@ -66,4 +66,4 @@ def subtract(x: Integer, y: Integer) -> Integer:
         else:
             carry = 0
 
-    return Integer(result, x.is_negative).strip_pad()
+    return Integer(result, x.is_negative, x.radix).strip_pad()
