@@ -57,36 +57,3 @@ def get_quotient(r: Integer, y: Integer) -> Integer:
 
 
 
-# Remove when multiplication is finished
-import string
-
-digs = string.digits + string.ascii_letters
-
-
-def multiply(x: Integer, y: Integer) -> Integer:
-    result = int(x.to_string(), x.radix) * int(y.to_string(), y.radix)
-
-    return Integer.from_string(int2base(result, x.radix), x.radix)
-
-
-def int2base(x, base):
-    if x < 0:
-        sign = -1
-    elif x == 0:
-        return digs[0]
-    else:
-        sign = 1
-
-    x *= sign
-    digits = []
-
-    while x:
-        digits.append(digs[int(x % base)])
-        x = x // base
-
-    if sign < 0:
-        digits.append("-")
-
-    digits.reverse()
-
-    return "".join(digits)
