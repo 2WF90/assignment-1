@@ -1,5 +1,6 @@
 from src.integer import Integer
 from src.basic_arithmetic import add, subtract
+from src.multiplication import *
 
 
 # Implementation of Algorithm 1.6 for long division from the lecture notes
@@ -28,7 +29,7 @@ def divide(x: Integer, y: Integer) -> tuple[Integer, Integer]:
 
         # Update the remainder
         r = subtract(
-            r, multiply(Integer([q[i]], False, y.radix), b_i_y)
+            r, multiplication_karatsuba(Integer([q[i]], False, y.radix), b_i_y)
         )  # step 2.3
 
     # Create the quotient as an Integer, adjusting the sign, and removing leading zeros
