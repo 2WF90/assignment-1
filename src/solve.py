@@ -16,7 +16,11 @@
 
 # Import built-in json library for handling input/output
 import json
+
+
+
 from src.basic_arithmetic import add, subtract
+from src.modular_inverse import ModInverse
 from src.multiplication import multiplication_karatsuba, multiplication_primary
 from src.integer import Integer
 from src.modular_arithmetic import mod_add, mod_subtract, mod_multiplication
@@ -65,12 +69,12 @@ def solve(exercise: object):
 
             return {"answer": result}
 
-        
+
         elif operation == "extended_euclidean_algorithm":
             result = extended_euclidean(x, Integer.from_string(exercise["y"], radix))
 
             return {"answer-a": result[0], "answer-b": result[1], "answer-gcd": result[2]}
-    
+
     elif exercise["type"] == "modular_arithmetic":
         modulus = Integer.from_string(exercise["modulus"], radix)
 
@@ -92,7 +96,19 @@ def solve(exercise: object):
             ).to_string()
 
             return {"answer": result}
-        # et cetera
+
+
+        if operation == "multiplication":
+            result = mod_multiplication(x, Integer.from_string(exercise["y"], radix), modulus).to_string()
+
+            return {"answer": result}
+
+        if operation == "inversion":
+            result = ModInverse(
+                x, modulus
+            ).to_string()
+
+            return {"answer": result}
 
 
 def solve_from_file(exercise_location: str) -> object:
