@@ -21,6 +21,7 @@ from src.basic_arithmetic import add, subtract
 from src.integer import Integer
 from src.modular_arithmetic import mod_add, mod_subtract
 from src.reduction import reduce
+from src.extend_euclidean import extended_euclidean
 
 
 """
@@ -53,7 +54,12 @@ def solve(exercise: object):
             result = subtract(x, Integer.from_string(exercise["y"], radix)).to_string()
 
             return {"answer": result}
-        # et cetera
+        
+        elif operation == "extended_euclidean_algorithm":
+            result = extended_euclidean(x, Integer.from_string(exercise["y"], radix))
+
+            return {"answer-a": result[0], "answer-b": result[1], "answer-gcd": result[2]}
+    
     elif exercise["type"] == "modular_arithmetic":
         modulus = Integer.from_string(exercise["modulus"], radix)
 
@@ -76,6 +82,7 @@ def solve(exercise: object):
 
             return {"answer": result}
         # et cetera
+    
 
 
 def solve_from_file(exercise_location: str) -> object:
