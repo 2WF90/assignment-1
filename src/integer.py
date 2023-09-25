@@ -29,19 +29,30 @@ class Integer:
             [get_representation(exponent) for exponent in self.exponents[::-1]],
         )
 
+    def pad_n(self, n: int) -> Self:
+        exponents = self.exponents + [0] * n
+
+        return Integer(exponents, self.is_negative, self.radix)
+
+    def pad_back(self, n: int) -> Self:
+        exponents = [0] * n + self.exponents
+
+        return Integer(exponents, self.is_negative, self.radix)
+
     def pad(self, pad_length: int) -> Self:
         exponents = self.exponents + [0] * (pad_length - len(self.exponents))
 
         return Integer(exponents, self.is_negative, self.radix)
 
     def strip_pad(self) -> Self:
-        while len(self.exponents) > 1 and self.exponents[-1] == 0:
-            self.exponents.pop()
+        exponents = self.exponents.copy()
+        while len(exponents) > 1 and exponents[-1] == 0:
+            exponents.pop()
 
-        return Integer(self.exponents, self.is_negative, self.radix)
+        return Integer(exponents, self.is_negative, self.radix)
 
     def make_absolute(self) -> Self:
-        return Integer(self.exponents, False, self.radix)
+        return Integer(self.exponents.copy(), False, self.radix)
 
     def set_negative(self) -> Self:
-        return Integer(self.exponents, True, self.radix)
+        return Integer(self.exponents.copy(), True, self.radix)
