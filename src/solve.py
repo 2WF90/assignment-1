@@ -8,16 +8,16 @@
 # 21
 #
 # Author names and student IDs:
-# Thijs Notten (author_student_ID_1)
-# Tom Nagel (author_student_ID_2)
-# Vincent Hoogendam (author_student_ID_3)
+# Thijs Notten (1717219)
+# Tom Nagel (1716042)
+# Vincent Hoogendam (1440551)
 # Christian Groothuis (1715534)
 ##
 
 # Import built-in json library for handling input/output
 import json
 from src.basic_arithmetic import add, subtract
-
+from src.multiplication import mod_multiplication, multiplication_karatsuba, multiplication_primary
 from src.integer import Integer
 from src.modular_arithmetic import mod_add, mod_subtract
 from src.reduction import reduce
@@ -50,10 +50,21 @@ def solve(exercise: object):
 
             return {"answer": result}
 
-        elif operation == "subtraction":
+        if operation == "subtraction":
             result = subtract(x, Integer.from_string(exercise["y"], radix)).to_string()
 
             return {"answer": result}
+
+        if operation == "multiplication_karatsuba" or operation == "multiplication":
+            result = multiplication_karatsuba(x, Integer.from_string(exercise["y"], radix)).to_string()
+
+            return {"answer": result}
+
+        if operation == "multiplication_primary":
+            result = multiplication_primary(x, Integer.from_string(exercise["y"], radix)).to_string()
+
+            return {"answer": result}
+
         
         elif operation == "extended_euclidean_algorithm":
             result = extended_euclidean(x, Integer.from_string(exercise["y"], radix))
@@ -82,7 +93,6 @@ def solve(exercise: object):
 
             return {"answer": result}
         # et cetera
-    
 
 
 def solve_from_file(exercise_location: str) -> object:
