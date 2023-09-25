@@ -2,6 +2,7 @@ from src.integer import Integer
 from src.basic_arithmetic import subtract
 from src.division import *
 from src.helpers import *
+from src.multiplication import *
 
 def extended_euclidean(x: Integer, y: Integer) -> tuple[Integer, Integer, Integer]:
     x_prime = x
@@ -23,8 +24,8 @@ def extended_euclidean(x: Integer, y: Integer) -> tuple[Integer, Integer, Intege
         x_prime = y_prime
         y_prime = r
 
-        a_3 = subtract(a_1, multiply(q, a_2))
-        b_3 = subtract(b_1, multiply(q, b_2))
+        a_3 = subtract(a_1, multiplication_primary(q, a_2))
+        b_3 = subtract(b_1, multiplication_primary(q, b_2))
 
         a_1 = a_2
         b_1 = b_2
