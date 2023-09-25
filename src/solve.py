@@ -17,7 +17,7 @@
 # Import built-in json library for handling input/output
 import json
 from src.basic_arithmetic import add, subtract
-from src.multiplication import multiplication_karatsuba, multiplication_primary
+from src.multiplication import mod_multiplication, multiplication_karatsuba, multiplication_primary
 from src.integer import Integer
 from src.modular_arithmetic import mod_add, mod_subtract
 from src.reduction import reduce
@@ -49,22 +49,21 @@ def solve(exercise: object):
 
             return {"answer": result}
 
-        elif operation == "subtraction":
+        if operation == "subtraction":
             result = subtract(x, Integer.from_string(exercise["y"], radix)).to_string()
 
             return {"answer": result}
 
-        elif operation == "multiplication_karatsuba" or operation == "multiplication":
+        if operation == "multiplication_karatsuba" or operation == "multiplication":
             result = multiplication_karatsuba(x, Integer.from_string(exercise["y"], radix)).to_string()
 
             return {"answer": result}
 
-        elif operation == "multiplication_primary":
+        if operation == "multiplication_primary":
             result = multiplication_primary(x, Integer.from_string(exercise["y"], radix)).to_string()
 
             return {"answer": result}
-        
-        # et cetera
+
     elif exercise["type"] == "modular_arithmetic":
         modulus = Integer.from_string(exercise["modulus"], radix)
 
@@ -86,7 +85,11 @@ def solve(exercise: object):
             ).to_string()
 
             return {"answer": result}
-        # et cetera
+
+        if operation == "multiplication":
+            result = mod_multiplication(x, Integer.from_string(exercise["y"], radix), modulus).to_string()
+
+            return {"answer": result}
 
 
 def solve_from_file(exercise_location: str) -> object:
