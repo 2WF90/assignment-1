@@ -2,7 +2,7 @@ from src.division import divide
 from src.integer import Integer
 
 
-def reduce(x: Integer, modulus: Integer) -> Integer:
+def reduction(x: Integer, modulus: Integer) -> Integer:
     # check if the modulus is zero (no reduction needed)
     if modulus.strip_pad().exponents == [0]:
         return Integer([], False, x.radix)

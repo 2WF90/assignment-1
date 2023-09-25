@@ -1,5 +1,6 @@
 from src.integer import Integer
 from src.basic_arithmetic import add, subtract
+from src.multiplication import multiplication_karatsuba
 
 
 # Implementation of Algorithm 1.6 for long division from the lecture notes
@@ -28,7 +29,7 @@ def divide(x: Integer, y: Integer) -> tuple[Integer, Integer]:
 
         # Update the remainder
         r = subtract(
-            r, multiply(Integer([q[i]], False, y.radix), b_i_y)
+            r, multiplication_karatsuba(Integer([q[i]], False, y.radix), b_i_y)
         )  # step 2.3
 
     # Create the quotient as an Integer, adjusting the sign, and removing leading zeros
@@ -54,39 +55,3 @@ def get_quotient(r: Integer, y: Integer) -> Integer:
             break
 
     return q_prime
-
-
-
-# Remove when multiplication is finished
-import string
-
-digs = string.digits + string.ascii_letters
-
-
-def multiply(x: Integer, y: Integer) -> Integer:
-    result = int(x.to_string(), x.radix) * int(y.to_string(), y.radix)
-
-    return Integer.from_string(int2base(result, x.radix), x.radix)
-
-
-def int2base(x, base):
-    if x < 0:
-        sign = -1
-    elif x == 0:
-        return digs[0]
-    else:
-        sign = 1
-
-    x *= sign
-    digits = []
-
-    while x:
-        digits.append(digs[int(x % base)])
-        x = x // base
-
-    if sign < 0:
-        digits.append("-")
-
-    digits.reverse()
-
-    return "".join(digits)
