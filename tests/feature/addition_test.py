@@ -6,7 +6,7 @@ def test_realistic_exercise_1():
 
 
 def test_realistic_exercise_2():
-    assert_exercise("realistic", 7)
+    assert_exercise("realistic", 4)
 
 
 def test_simple_exercise_1():
