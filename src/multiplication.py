@@ -1,11 +1,15 @@
 from src.integer import Integer
 from src.basic_arithmetic import add, subtract
 
+#----------------------------------------------------------------
+# KARATSUBA
+#----------------------------------------------------------------
+
 # Gateway to karatsuba, does negativity and length overhead checks
 # param: x, any Integer
 # param: y, any Integer
 # return x * y, Integer
-def multiplication(x: Integer, y: Integer) -> Integer:
+def multiplication_karatsuba(x: Integer, y: Integer) -> Integer:
     max_length = max(len(x), len(y))
     x = x.pad(max_length)
     y = y.pad(max_length)
@@ -74,3 +78,24 @@ def karatsuba(x: Integer, y: Integer) -> Integer:
     XlYl = XlYl.pad_back(n)
 
     return add(add(XlYl, XmYm), XsYs)
+
+#----------------------------------------------------------------
+# PRIMARY SHOOL METHOD
+#----------------------------------------------------------------
+
+def multiplication_primary(x: Integer, y: Integer) -> Integer:
+    result = [0] * (len(x) + len(y))
+    carry = 0
+
+    for i in range(len(x)):
+        for j in range(len(y)):
+            r = x[i] * y[j] + carry + result[i + j]
+            result[i + j] = r % x.radix
+            carry = r // x.radix
+            
+        result[i + len(y)] += carry
+        carry = 0
+
+    sign = x.is_negative ^ y.is_negative
+
+    return Integer(result, sign, x.radix).strip_pad()
