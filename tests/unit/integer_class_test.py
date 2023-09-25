@@ -36,3 +36,30 @@ def test_with_padding():
     x = Integer.from_string("-AB894F", 16)
 
     assert "-0000AB894F" == x.pad(10).to_string()
+
+
+def test_divide_by_radix():
+    x = Integer.from_string("-900", 16)
+
+    assert "-9" == x.divide_by_radix(2).to_string()
+
+def test_divide_by_radix2():
+    x = Integer.from_string("EEFF", 16)
+
+    assert "EEF" == x.divide_by_radix(1).to_string()
+
+def test_divide_by_radix2():
+    x = Integer.from_string("140", 10)
+
+    assert "0" == x.divide_by_radix(3).to_string()
+
+
+def test_modulus_radix():
+    x = Integer.from_string("911", 16)
+
+    assert "11" == x.modulus_radix(1).to_string()
+
+def test_modulus_radix():
+    x = Integer.from_string("-911", 10)
+
+    assert "89" == x.modulus_radix(1).to_string()

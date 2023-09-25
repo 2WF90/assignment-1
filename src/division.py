@@ -1,6 +1,6 @@
 from src.integer import Integer
 from src.basic_arithmetic import add, subtract
-from src.multiplication import *
+from src.multiplication import multiplication_karatsuba
 
 
 # Implementation of Algorithm 1.6 for long division from the lecture notes
@@ -55,6 +55,3 @@ def get_quotient(r: Integer, y: Integer) -> Integer:
             break
 
     return q_prime
-
-
-

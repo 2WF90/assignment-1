@@ -1,6 +1,7 @@
 from src.basic_arithmetic import add, subtract
 from src.integer import Integer
-from src.reduction import reduce
+from src.multiplication import multiplication_karatsuba
+from src.reduction import reduction
 
 
 def mod_add(x: Integer, y: Integer, modulus: Integer) -> Integer:
@@ -15,7 +16,7 @@ def mod_add(x: Integer, y: Integer, modulus: Integer) -> Integer:
         z = subtract(z_prime, modulus)
 
     # reduce the result to ensure it's within the modulus range
-    return reduce(z, modulus)
+    return reduction(z, modulus)
 
 
 def mod_subtract(x: Integer, y: Integer, modulus: Integer) -> Integer:
@@ -30,4 +31,11 @@ def mod_subtract(x: Integer, y: Integer, modulus: Integer) -> Integer:
         z = add(z_prime, modulus)
 
     # reduce the result to ensure it's within the modulus range
-    return reduce(z, modulus)
+    return reduction(z, modulus)
+
+
+def mod_multiplication(x: Integer, y: Integer, modulus: Integer) -> Integer:
+    if (modulus.strip_pad().exponents == [0]):
+        return Integer([], False, x.radix)
+
+    return reduction(multiplication_karatsuba(x, y), modulus)

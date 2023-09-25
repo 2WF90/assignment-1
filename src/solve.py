@@ -17,10 +17,10 @@
 # Import built-in json library for handling input/output
 import json
 from src.basic_arithmetic import add, subtract
-from src.multiplication import mod_multiplication, multiplication_karatsuba, multiplication_primary
+from src.multiplication import multiplication_karatsuba, multiplication_primary
 from src.integer import Integer
-from src.modular_arithmetic import mod_add, mod_subtract
-from src.reduction import reduce
+from src.modular_arithmetic import mod_add, mod_subtract, mod_multiplication
+from src.reduction import reduction
 from src.extend_euclidean import extended_euclidean
 
 
@@ -76,7 +76,7 @@ def solve(exercise: object):
 
         # Check what operation within the modular arithmetic operations we need to solve
         if operation == "reduction":
-            result = reduce(x, modulus).to_string()
+            result = reduction(x, modulus).to_string()
 
             return {"answer": result}
         if operation == "addition":
