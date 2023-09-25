@@ -8,9 +8,9 @@
 # 21
 #
 # Author names and student IDs:
-# Thijs Notten (author_student_ID_1)
-# Tom Nagel (author_student_ID_2)
-# Vincent Hoogendam (author_student_ID_3)
+# Thijs Notten (1717219)
+# Tom Nagel (1716042)
+# Vincent Hoogendam (1440551)
 # Christian Groothuis (1715534)
 ##
 
