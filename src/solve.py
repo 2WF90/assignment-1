@@ -21,6 +21,7 @@ from src.multiplication import multiplication_karatsuba, multiplication_primary
 from src.integer import Integer
 from src.modular_arithmetic import mod_add, mod_subtract
 from src.reduction import reduce
+from src.modularInverse import ModInverse
 
 
 """
@@ -86,6 +87,11 @@ def solve(exercise: object):
             ).to_string()
 
             return {"answer": result}
+        
+        if operation == "inversion":
+            result = ModInverse(
+                x, modulus
+            ).to_string()
         # et cetera
 
 
