@@ -8,9 +8,9 @@
 # 21
 #
 # Author names and student IDs:
-# Thijs Notten (author_student_ID_1)
-# Tom Nagel (author_student_ID_2)
-# Vincent Hoogendam (author_student_ID_3)
+# Thijs Notten (1717219)
+# Tom Nagel (1716042)
+# Vincent Hoogendam (1440551)
 # Christian Groothuis (1715534)
 ##
 
@@ -19,9 +19,9 @@ import json
 from src.basic_arithmetic import add, subtract
 from src.multiplication import multiplication_karatsuba, multiplication_primary
 from src.integer import Integer
-from src.modular_arithmetic import mod_add, mod_subtract
-from src.reduction import reduce
 from src.modularInverse import ModInverse
+from src.modular_arithmetic import mod_add, mod_multiplication, mod_subtract
+from src.reduction import reduction
 
 
 """
@@ -50,28 +50,27 @@ def solve(exercise: object):
 
             return {"answer": result}
 
-        elif operation == "subtraction":
+        if operation == "subtraction":
             result = subtract(x, Integer.from_string(exercise["y"], radix)).to_string()
 
             return {"answer": result}
 
-        elif operation == "multiplication_karatsuba" or operation == "multiplication":
+        if operation == "multiplication_karatsuba" or operation == "multiplication":
             result = multiplication_karatsuba(x, Integer.from_string(exercise["y"], radix)).to_string()
 
             return {"answer": result}
 
-        elif operation == "multiplication_primary":
+        if operation == "multiplication_primary":
             result = multiplication_primary(x, Integer.from_string(exercise["y"], radix)).to_string()
 
             return {"answer": result}
-        
-        # et cetera
+
     elif exercise["type"] == "modular_arithmetic":
         modulus = Integer.from_string(exercise["modulus"], radix)
 
         # Check what operation within the modular arithmetic operations we need to solve
         if operation == "reduction":
-            result = reduce(x, modulus).to_string()
+            result = reduction(x, modulus).to_string()
 
             return {"answer": result}
         if operation == "addition":
@@ -87,7 +86,7 @@ def solve(exercise: object):
             ).to_string()
 
             return {"answer": result}
-        
+
         if operation == "inversion":
             result = ModInverse(
                 x, modulus
@@ -95,6 +94,11 @@ def solve(exercise: object):
 
             return {"answer": result}
         # et cetera
+
+        if operation == "multiplication":
+            result = mod_multiplication(x, Integer.from_string(exercise["y"], radix), modulus).to_string()
+
+            return {"answer": result}
 
 
 def solve_from_file(exercise_location: str) -> object:

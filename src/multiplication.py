@@ -43,7 +43,7 @@ def karatsuba(x: Integer, y: Integer) -> Integer:
 
     # Step:
     # Make list lenght even
-    if n & 1: 
+    if n & 1:
         x = x.pad_n(1)
         y = y.pad_n(1)
         n = n + 1
@@ -59,7 +59,7 @@ def karatsuba(x: Integer, y: Integer) -> Integer:
     Ys = Integer(y[:halfN], False, x.radix)
     Ym = add(Yl, Ys)
 
-    # Addition lenght checking 
+    # Addition lenght checking
     xmLen = len(Xm)
     ymLen = len(Ym)
     if xmLen > ymLen:
@@ -92,7 +92,7 @@ def multiplication_primary(x: Integer, y: Integer) -> Integer:
             r = x[i] * y[j] + carry + result[i + j]
             result[i + j] = r % x.radix
             carry = r // x.radix
-            
+
         result[i + len(y)] += carry
         carry = 0
 

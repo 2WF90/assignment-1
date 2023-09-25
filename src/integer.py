@@ -29,6 +29,44 @@ class Integer:
             [get_representation(exponent) for exponent in self.exponents[::-1]],
         )
 
+    def divide_by_radix(self, power: int) -> Self:
+        if len(self.exponents) == 0:
+            return Integer([], False, self.radix)
+
+        exponents = self.exponents.copy()
+
+        if power >= len(exponents):
+            return Integer([0], False, self.radix)
+
+        for _ in range(power):  # remove i digits from the front
+            exponents.pop(0)
+
+        if len(exponents) == 0:
+            return Integer([0], False, self.radix)
+
+        return Integer(exponents, self.is_negative, self.radix)
+
+    def modulus_radix(self, power: int) -> Self:
+        from src.basic_arithmetic import add
+
+        if len(self.exponents) == 0:
+            return Integer([], False, self.radix)
+
+        exponents = self.exponents.copy()
+
+        if power + 1>= len(exponents):
+            return Integer(exponents.copy(), self.is_negative, self.radix)
+
+        for _ in range(power):  # remove i digits from the front
+            exponents.pop()
+
+        result = Integer(exponents, self.is_negative, self.radix)
+
+        if self.is_negative:
+            return add(result, Integer([0] * (power + 1) + [1], False, self.radix))
+
+        return result
+
     def pad_n(self, n: int) -> Self:
         exponents = self.exponents + [0] * n
 
