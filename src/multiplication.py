@@ -7,8 +7,8 @@ from src.basic_arithmetic import add, subtract
 # return x * y, Integer
 def multiplication(x: Integer, y: Integer) -> Integer:
     max_length = max(len(x), len(y))
-    x.pad(max_length)
-    y.pad(max_length)
+    x = x.pad(max_length)
+    y = y.pad(max_length)
 
     if x.is_negative ^ y.is_negative:
         result = karatsuba(x, y).set_negative().strip_pad()
@@ -40,8 +40,8 @@ def karatsuba(x: Integer, y: Integer) -> Integer:
     # Step:
     # Make list lenght even
     if n & 1: 
-        x.pad_n(1)
-        y.pad_n(1)
+        x = x.pad_n(1)
+        y = y.pad_n(1)
         n = n + 1
 
     halfN = n >> 1
@@ -59,9 +59,9 @@ def karatsuba(x: Integer, y: Integer) -> Integer:
     xmLen = len(Xm)
     ymLen = len(Ym)
     if xmLen > ymLen:
-        Ym.pad_n(1)
+        Ym = Ym.pad_n(1)
     elif ymLen > xmLen:
-        Xm.pad_n(1)
+        Xm = Xm.pad_n(1)
 
     # Recurse on all 3 parts
     XlYl = karatsuba(Xl, Yl)
@@ -70,7 +70,7 @@ def karatsuba(x: Integer, y: Integer) -> Integer:
 
     # Compute mid and shift digits
     XmYm = subtract(subtract(XmYm, XlYl), XsYs)
-    XmYm.pad_back(halfN)
-    XlYl.pad_back(n)
+    XmYm = XmYm.pad_back(halfN)
+    XlYl = XlYl.pad_back(n)
 
     return add(add(XlYl, XmYm), XsYs)
