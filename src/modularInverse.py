@@ -29,10 +29,6 @@ def ModInverse(x: Integer, modulus: Integer) -> Integer:
 
     if len(x) == 1 and x.exponents[0] == 1:
         inverse = xOne
-        # while inverse.is_negative == True:
-        #     inverse = add(inverse, modulus)
-
-        # _, inverse = divide(xOne, modulus)
 
         return inverse
 
