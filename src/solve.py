@@ -92,6 +92,8 @@ def solve(exercise: object):
             result = ModInverse(
                 x, modulus
             ).to_string()
+
+            return {"answer": result}
         # et cetera
 
 
